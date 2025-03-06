@@ -2,13 +2,13 @@ import axios from "axios";
 
 import { ICurrentCityWeather, ISearchCity } from "@/data/weather.props";
 
-const BASE_URL = "http://api.weatherapi.com/v1";
-const API_KEY = "a92243ce8f3b4616ac6220814242306";
+const baseUrl = import.meta.env.VITE_BASE_URL;
+const apiKey = import.meta.env.VITE_API_KEY;
 
 export async function fetchSearchCity(query: string) {
   try {
     const { data } = await axios.get<ISearchCity[]>(
-      `${BASE_URL}/search.json?key=${API_KEY}&q=${query}`
+      `${baseUrl}/search.json?key=${apiKey}&q=${query}`
     );
     return data;
   } catch (error) {
@@ -25,7 +25,7 @@ export async function fetchSearchCity(query: string) {
 export async function fetchCurrentCity(query: string, country: string) {
   try {
     const { data } = await axios.get<ICurrentCityWeather>(
-      `${BASE_URL}/current.json?key=${API_KEY}&q=${query}%20${country}`
+      `${baseUrl}/current.json?key=${apiKey}&q=${query}%20${country}`
     );
     return data;
   } catch (error) {
